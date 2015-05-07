@@ -10,3 +10,4 @@ C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\nunit.frame
 C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\nunit.framework.xml
 C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\obj\Debug\Caelum.Leilao.dll
 C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\obj\Debug\Caelum.Leilao.pdb
+C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\obj\Debug\Caelum.Leilao.csprojResolveAssemblyReference.cache

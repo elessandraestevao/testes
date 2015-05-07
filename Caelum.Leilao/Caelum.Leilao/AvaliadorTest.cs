@@ -38,9 +38,51 @@ namespace Caelum.Leilao
         }
 
         [Test]
-        public void DeveAgirComNumerosNegativos()
+        public void DeveEntenderMaiorEMenorLanceIguais()
         {
+            //cenário
+            Leilao leilao = new Leilao("Segundo Leilão");
 
+            Usuario joao = new Usuario("João");            
+            Usuario maria = new Usuario("Maria");
+
+            leilao.Propoe(new Lance(maria, 200.0));            
+            leilao.Propoe(new Lance(joao, 200.0));
+
+
+            //Ação
+            Avaliador avaliador = new Avaliador();
+            avaliador.Avalia(leilao);
+
+            //Validação
+            double menorValorEsperado = 200;
+            double maiorValorEsperado = 200;
+
+            Assert.AreEqual(menorValorEsperado, avaliador.MenorLance);
+            Assert.AreEqual(maiorValorEsperado, avaliador.MaiorLance);
+        }
+
+        [Test]
+        public void DeveEntenderApenasUmLanceDado()
+        {
+            //cenário
+            Leilao leilao = new Leilao("Segundo Leilão");
+
+            Usuario joao = new Usuario("João"); 
+
+            leilao.Propoe(new Lance(joao, 200.0));
+
+
+            //Ação
+            Avaliador avaliador = new Avaliador();
+            avaliador.Avalia(leilao);
+
+            //Validação
+            double menorValorEsperado = 200;
+            double maiorValorEsperado = 200;
+
+            Assert.AreEqual(menorValorEsperado, avaliador.MenorLance);
+            Assert.AreEqual(maiorValorEsperado, avaliador.MaiorLance);
         }
     }
 }

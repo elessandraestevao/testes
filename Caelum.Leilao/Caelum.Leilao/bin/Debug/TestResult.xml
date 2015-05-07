@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-05-06" time="15:22:28">
+<test-results name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" total="3" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-05-07" time="14:23:49">
   <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.4\bin" machine-name="R2D2" user="Elessandra" user-domain="R2D2" />
   <culture-info current-culture="pt-BR" current-uiculture="pt-BR" />
-  <test-suite type="Assembly" name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" executed="True" result="Success" success="True" time="0.065" asserts="0">
+  <test-suite type="Assembly" name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" executed="True" result="Success" success="True" time="0.025" asserts="0">
     <results>
-      <test-suite type="Namespace" name="Caelum" executed="True" result="Success" success="True" time="0.048" asserts="0">
+      <test-suite type="Namespace" name="Caelum" executed="True" result="Success" success="True" time="0.024" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Leilao" executed="True" result="Success" success="True" time="0.048" asserts="0">
+          <test-suite type="Namespace" name="Leilao" executed="True" result="Success" success="True" time="0.023" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="AvaliadorTest" executed="True" result="Success" success="True" time="0.046" asserts="0">
+              <test-suite type="TestFixture" name="AvaliadorTest" executed="True" result="Success" success="True" time="0.022" asserts="0">
                 <results>
-                  <test-case name="Caelum.Leilao.AvaliadorTest.DeveEntenderLancesEmOrdemCrescente" executed="True" result="Success" success="True" time="0.035" asserts="2" />
+                  <test-case name="Caelum.Leilao.AvaliadorTest.DeveEntenderApenasUmLanceDado" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="Caelum.Leilao.AvaliadorTest.DeveEntenderLancesEmOrdemCrescente" executed="True" result="Success" success="True" time="0.003" asserts="2" />
+                  <test-case name="Caelum.Leilao.AvaliadorTest.DeveEntenderMaiorEMenorLanceIguais" executed="True" result="Success" success="True" time="0.002" asserts="2" />
                 </results>
               </test-suite>
             </results>
