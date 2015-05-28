@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-05-07" time="15:21:49">
+<test-results name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-05-28" time="14:59:08">
   <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.4\bin" machine-name="R2D2" user="Elessandra" user-domain="R2D2" />
   <culture-info current-culture="pt-BR" current-uiculture="pt-BR" />
-  <test-suite type="Assembly" name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" executed="True" result="Failure" success="False" time="0.005" asserts="0">
+  <test-suite type="Assembly" name="C:\Users\Elessandra\git\testes\Caelum.Leilao\Caelum.Leilao\bin\Debug\Caelum.Leilao.dll" executed="True" result="Failure" success="False" time="0.009" asserts="0">
     <results>
-      <test-suite type="Namespace" name="Caelum" executed="True" result="Failure" success="False" time="0.004" asserts="0">
+      <test-suite type="Namespace" name="Caelum" executed="True" result="Failure" success="False" time="0.008" asserts="0">
         <results>
           <test-suite type="Namespace" name="Leilao" executed="True" result="Failure" success="False" time="0.004" asserts="0">
             <results>

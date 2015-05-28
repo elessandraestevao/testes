@@ -3,13 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using NUnit.Framework;
-namespace Caelum.Leilao
+//using Curso.Leilao;
+
+namespace Curso.Leilao
 {
     [TestFixture]
     public class AvaliadorTest
     {
+        [Test]
+        public void DeveCalcularCorretamenteAMediaDosLancesDados()
+        {
+            //cenário
+            Leilao leilao = new Leilao("Primeiro Leilão");
+
+            Usuario joao = new Usuario("João");
+            Usuario jose = new Usuario("José");
+            Usuario maria = new Usuario("Maria");
+
+            leilao.Propoe(new Lance(maria, 200.0));
+            leilao.Propoe(new Lance(jose, 300.0));
+            leilao.Propoe(new Lance(joao, 400.0));
+
+
+            //Ação
+            Avaliador avaliador = new Avaliador();
+            avaliador.Avalia(leilao);
+
+            //Validação
+            double mediaEsperada = (200 + 300 + 400) / 3;
+
+            Assert.AreEqual(mediaEsperada, avaliador.MediaLances);
+        }
+
         [Test]
         public void DeveEntenderLancesEmOrdemCrescente()
         {
@@ -86,4 +112,3 @@ namespace Caelum.Leilao
         }
     }
 }
-
