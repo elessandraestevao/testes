@@ -19,8 +19,35 @@ namespace Curso.Leilao
         }
 
         public void Propoe(Lance lance)
-        {
-            Lances.Add(lance);
+        {    
+            if (Lances.Count == 0 || PodeAdicionarLance(lance.Usuario))
+            {
+                Lances.Add(lance);
+            }            
         }
+
+        private bool PodeAdicionarLance(Usuario usuario)
+        {
+            return !UltimoLanceDado().Usuario.Equals(usuario) 
+                && QtdeDeLancesDeUmUsuario(usuario) < 5;
+        }
+
+        private int QtdeDeLancesDeUmUsuario(Usuario usuario)
+        {
+            int total = 0;
+            foreach (Lance l in Lances)
+            {
+                if (l.Usuario.Equals(usuario))
+                {
+                    total++;
+                }
+            }
+            return total;
+        }
+
+        private Lance UltimoLanceDado()
+        {
+            return Lances[Lances.Count - 1];
+        }       
     }
 }

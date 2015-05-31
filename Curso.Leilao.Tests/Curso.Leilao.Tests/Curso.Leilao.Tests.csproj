@@ -7,7 +7,7 @@
     <ProjectGuid>{08A6217B-2DCF-410A-A997-AA2315E405F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Curso.Leilao.Tests</RootNamespace>
+    <RootNamespace>Curso.Leilao</RootNamespace>
     <AssemblyName>Curso.Leilao.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvaliadorTest.cs" />
+    <Compile Include="FiltroDeLancesTest.cs" />
+    <Compile Include="LeilaoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
