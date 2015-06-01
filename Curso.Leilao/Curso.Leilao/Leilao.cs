@@ -10,7 +10,7 @@ namespace Curso.Leilao
     {
 
         public string Descricao { get; set; }
-        public IList<Lance> Lances { get; set; }
+        public IList<Lance> Lances { get; set; }        
 
         public Leilao(string descricao)
         {
@@ -18,21 +18,43 @@ namespace Curso.Leilao
             this.Lances = new List<Lance>();
         }
 
+        public void DobraLance(Usuario usuario)
+        {  
+            Lance ultimoLance = ultimoLanceDo(usuario);
+            if (ultimoLance != null)
+            {
+                Propoe(new Lance(usuario, ultimoLance.Valor * 2));
+            }
+        }
+
+        private Lance ultimoLanceDo(Usuario usuario)
+        {
+            Lance ultimoLance = null;
+            foreach (var l in Lances)
+            {
+                if (l.Usuario.Equals(usuario))
+                {
+                    ultimoLance = l;
+                }
+            }
+            return ultimoLance;
+        }
+
         public void Propoe(Lance lance)
         {    
-            if (Lances.Count == 0 || PodeAdicionarLance(lance.Usuario))
+            if (Lances.Count == 0 || podeAdicionarLance(lance.Usuario))
             {
                 Lances.Add(lance);
             }            
         }
 
-        private bool PodeAdicionarLance(Usuario usuario)
+        private bool podeAdicionarLance(Usuario usuario)
         {
-            return !UltimoLanceDado().Usuario.Equals(usuario) 
-                && QtdeDeLancesDeUmUsuario(usuario) < 5;
+            return !ultimoLanceDado().Usuario.Equals(usuario) 
+                && qtdeDeLancesDeUmUsuario(usuario) < 5;
         }
 
-        private int QtdeDeLancesDeUmUsuario(Usuario usuario)
+        private int qtdeDeLancesDeUmUsuario(Usuario usuario)
         {
             int total = 0;
             foreach (Lance l in Lances)
@@ -45,7 +67,7 @@ namespace Curso.Leilao
             return total;
         }
 
-        private Lance UltimoLanceDado()
+        private Lance ultimoLanceDado()
         {
             return Lances[Lances.Count - 1];
         }       
