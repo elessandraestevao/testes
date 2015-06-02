@@ -9,16 +9,37 @@ namespace Curso.Leilao
 {
     [TestFixture]
     class LeilaoTest
-    {
+    {       
+        private Usuario joao;
+        private Usuario maria;
+
+        [TestFixtureSetUp]
+        public void TestandoBeforeClass()
+        {
+            Console.WriteLine("text fixture setup");
+        }
+
+        [TestFixtureTearDown]
+        public void TestandoAfterClass()
+        {
+            Console.WriteLine("test fixture tear down");
+        }
+
+        [SetUp]
+        public void SetUp()
+        {            
+            this.joao = new Usuario("João");
+            this.maria = new Usuario("Maria");
+            Console.WriteLine("Write line");
+        }
+
         [Test]
         public void NaoDeveAceitarDoisLancesSeguidosDoMesmoUsuario()
         {
-            Usuario joao = new Usuario("João");
-
-            Leilao leilao = new Leilao("Leilão de Macbook Pro");
-
-            leilao.Propoe(new Lance(joao, 6000.0));
-            leilao.Propoe(new Lance(joao, 7000.0));
+            Leilao leilao = new CriadorDeLeilao().Para("Macbook Pro")
+                .Lance(joao, 6000.0)
+                .Lance(joao, 7000.0)
+                .Constroi();
 
             Assert.AreEqual(1, leilao.Lances.Count);
             Assert.AreEqual(6000, leilao.Lances[0].Valor, 0.00001);
@@ -27,28 +48,10 @@ namespace Curso.Leilao
         [Test]
         public void NaoDeveAceitarMaisDoQue5LancesDeUmMesmoUsuario()
         {
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-
-            Leilao leilao = new Leilao("Leilão de Macbook Pro");
-
-            leilao.Propoe(new Lance(joao, 2000.0));
-            leilao.Propoe(new Lance(maria, 3000.0));
-
-            leilao.Propoe(new Lance(joao, 4000.0));
-            leilao.Propoe(new Lance(maria, 5000.0));
-
-            leilao.Propoe(new Lance(joao, 6000.0));
-            leilao.Propoe(new Lance(maria, 7000.0));
-
-            leilao.Propoe(new Lance(joao, 8000.0));
-            leilao.Propoe(new Lance(maria, 9000.0));
-
-            leilao.Propoe(new Lance(joao, 10000.0));
-            leilao.Propoe(new Lance(maria, 11000.0));
-
-            leilao.Propoe(new Lance(joao, 12000.0));
-
+            Leilao leilao = new CriadorDeLeilao().Para("Macbook Pro")
+                .CriaLancesAlternados(new List<Usuario> { joao, maria }, 5)
+                .Lance(joao, 12000.0)
+                .Constroi();
 
             int ultimo = leilao.Lances.Count - 1;
             Assert.AreEqual(10, leilao.Lances.Count);
@@ -58,16 +61,12 @@ namespace Curso.Leilao
         [Test]
         public void DeveDobrarUltimoLanceDoUsuario()
         {
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-
-            Leilao leilao = new Leilao("Leilão de Macbook Pro");
-
-            leilao.Propoe(new Lance(joao, 2000.0));
-            leilao.Propoe(new Lance(maria, 3000.0));
-
-            leilao.Propoe(new Lance(joao, 6000.0));
-            leilao.Propoe(new Lance(maria, 7000.0));
+            Leilao leilao = new CriadorDeLeilao().Para("Macbook Pro")
+                .Lance(joao, 2000.0)
+                .Lance(maria, 3000.0)
+                .Lance(joao, 6000.0)
+                .Lance(maria, 7000.0)
+                .Constroi();
 
             leilao.DobraLance(joao);
 
@@ -78,12 +77,9 @@ namespace Curso.Leilao
         [Test]
         public void NaoDeveDobrarUltimoLanceDoUsuarioCasoNaoHajaLanceAnterior()
         {
-            Usuario joao = new Usuario("João");
-            Leilao leilao = new Leilao("Leilão de Macbook Pro");           
-
+            Leilao leilao = new Leilao("Macbook Pro");
             leilao.DobraLance(joao);
-
             Assert.AreEqual(0, leilao.Lances.Count);            
-        }
+        }        
     }
 }

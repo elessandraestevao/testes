@@ -15,6 +15,11 @@ namespace Curso.Leilao
 
         public void Avalia(Leilao leilao)
         {
+            if (leilao.Lances.Count == 0)
+            {
+                throw new Exception("Não é possível avaliar leilão sem lances");
+            }
+
             foreach (var l in leilao.Lances)
             {
                 if (l.Valor > maiorValor)

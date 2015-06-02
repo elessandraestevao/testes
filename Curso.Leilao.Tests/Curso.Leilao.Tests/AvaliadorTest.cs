@@ -10,23 +10,39 @@ namespace Curso.Leilao
     [TestFixture]
     public class AvaliadorTest
     {
+        private Avaliador avaliador;
+        private Usuario joao;
+        private Usuario jose;
+        private Usuario maria;
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.avaliador = new Avaliador();
+            this.joao = new Usuario("João");
+            this.jose = new Usuario("José");
+            this.maria = new Usuario("Maria");
+        }
+
+        [TearDown]
+        public void Finaliza()
+        {
+            Console.WriteLine("fim");
+        }
+
         [Test]
         public void DeveEncontrarOsTresMaioresLancesComCincoLances()
         {
-            //cenário
-            Leilao leilao = new Leilao("Leilao de joias femininas");
+            //cenário utilizando Test Data Builder
+            Leilao leilao = new CriadorDeLeilao().Para("Leilao de joias femininas")
+                .Lance(joao, 200.0)
+                .Lance(maria, 450.0)
+                .Lance(joao, 120.0)
+                .Lance(maria, 700.0)
+                .Lance(joao, 630.0)
+                .Constroi();
 
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-
-            leilao.Propoe(new Lance(joao, 200.0));
-            leilao.Propoe(new Lance(maria, 450.0));
-            leilao.Propoe(new Lance(joao, 120.0));
-            leilao.Propoe(new Lance(maria, 700.0));
-            leilao.Propoe(new Lance(joao, 630.0));            
-
-            //Ação
-            Avaliador avaliador = new Avaliador();
+            //Ação          
             avaliador.Avalia(leilao);
 
             //Validação
@@ -39,17 +55,13 @@ namespace Curso.Leilao
         [Test]
         public void DeveEncontrarOsDoisMaioresLancesComDoisLances()
         {
-            //cenário
-            Leilao leilao = new Leilao("Leilao de joias femininas");
+            //cenário utilizando Test Data Builder
+            Leilao leilao = new CriadorDeLeilao().Para("Leilao de joias femininas")
+                .Lance(joao, 200.0)
+                .Lance(maria, 450.0)
+                .Constroi();
 
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-
-            leilao.Propoe(new Lance(joao, 200.0));
-            leilao.Propoe(new Lance(maria, 450.0));            
-
-            //Ação
-            Avaliador avaliador = new Avaliador();
+            //Ação            
             avaliador.Avalia(leilao);
 
             //Validação
@@ -58,32 +70,28 @@ namespace Curso.Leilao
             Assert.AreEqual(200, avaliador.TresMaiores[1].Valor, 0.0001);            
         }
 
-        [Test]
+        /*[Test]
         public void DeveRetornarListaVaziaComZeroLances()
         {
             //cenário
-            Leilao leilao = new Leilao("Leilao de joias femininas");            
+            Leilao leilao = new Leilao("Leilao de joias femininas");             
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
             Assert.AreEqual(0, avaliador.TresMaiores.Count);            
-        }
+        }*/
 
         [Test]
         public void DeveEncontrarOMaiorLanceApenasUmLance()
         {
             //cenário
-            Leilao leilao = new Leilao("Leilao de joias femininas");
-
-            Usuario joao = new Usuario("João");            
-
-            leilao.Propoe(new Lance(joao, 200.0));            
+            Leilao leilao = new CriadorDeLeilao().Para("Leilao de joias femininas")
+                .Lance(joao, 200.0)
+                .Constroi();
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
@@ -94,21 +102,17 @@ namespace Curso.Leilao
         [Test]
         public void DeveEntenderMaiorEMenorLancesEmOrdemAleatoria()
         {
-            //cenário
-            Leilao leilao = new Leilao("Leilao de joias femininas");
-
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-
-            leilao.Propoe(new Lance(joao, 200.0));
-            leilao.Propoe(new Lance(maria, 450.0));
-            leilao.Propoe(new Lance(joao, 120.0));
-            leilao.Propoe(new Lance(maria, 700.0));
-            leilao.Propoe(new Lance(joao, 630.0));
-            leilao.Propoe(new Lance(maria, 230.0));
+            //cenário utilizando Test Data Builder
+            Leilao leilao = new CriadorDeLeilao().Para("Leilao de joias femininas")
+                .Lance(joao, 200.0)
+                .Lance(maria, 450.0)
+                .Lance(joao, 120.0)
+                .Lance(maria, 700.0)
+                .Lance(joao, 630.0)
+                .Lance(maria, 230.0)
+                .Constroi();
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
@@ -120,19 +124,12 @@ namespace Curso.Leilao
         public void DeveCalcularCorretamenteAMediaDosLancesDados()
         {
             //cenário
-            Leilao leilao = new Leilao("Primeiro Leilão");
-
-            Usuario joao = new Usuario("João");
-            Usuario jose = new Usuario("José");
-            Usuario maria = new Usuario("Maria");
-
-            leilao.Propoe(new Lance(maria, 200.0));
-            leilao.Propoe(new Lance(jose, 300.0));
-            leilao.Propoe(new Lance(joao, 400.0));
-
-
+            Leilao leilao = new CriadorDeLeilao().Para("Primeiro Leilão")
+                .Lance(maria, 200.0)
+                .Lance(jose, 300.0)
+                .Lance(joao, 400.0)
+                .Constroi();
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
@@ -144,20 +141,15 @@ namespace Curso.Leilao
         [Test]
         public void DeveEntenderLancesEmOrdemCrescente()
         {
-            //cenário
-            Leilao leilao = new Leilao("Primeiro Leilão");
-
-            Usuario joao = new Usuario("João");
-            Usuario jose = new Usuario("José");
-            Usuario maria = new Usuario("Maria");
-
-            leilao.Propoe(new Lance(maria, 200.0));
-            leilao.Propoe(new Lance(jose, 300.0));
-            leilao.Propoe(new Lance(joao, 400.0));
+            //cenário utilizando Test Data Builder
+            Leilao leilao = new CriadorDeLeilao().Para("Primeiro Leilão")
+                .Lance(maria, 200.0)
+                .Lance(jose, 300.0)
+                .Lance(joao, 400.0)
+                .Constroi();
 
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
@@ -171,17 +163,15 @@ namespace Curso.Leilao
         [Test]
         public void DeveEntenderLanceEmOrdemDescrescente()
         {
-            //Cenário
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-            Leilao leilao = new Leilao("Leilão de joias masculinas");
-            leilao.Propoe(new Lance(joao, 400.0));
-            leilao.Propoe(new Lance(maria, 300.0));
-            leilao.Propoe(new Lance(joao, 200.0));
-            leilao.Propoe(new Lance(maria, 100.0));
+            //Cenário            
+            Leilao leilao = new CriadorDeLeilao().Para("Leilão de joias masculinas")
+                .Lance(joao, 400.0)
+                .Lance(maria, 300.0)
+                .Lance(joao, 200.0)
+                .Lance(maria, 100.0)
+                .Constroi();
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
@@ -193,18 +183,14 @@ namespace Curso.Leilao
         [Test]
         public void DeveEntenderMaiorEMenorLanceIguais()
         {
-            //cenário
-            Leilao leilao = new Leilao("Segundo Leilão");
-
-            Usuario joao = new Usuario("João");
-            Usuario maria = new Usuario("Maria");
-
-            leilao.Propoe(new Lance(maria, 200.0));
-            leilao.Propoe(new Lance(joao, 200.0));
+            //cenário utilizando Test Data Builder
+            Leilao leilao = new CriadorDeLeilao().Para("Segundo Leilão")
+                .Lance(maria, 200.0)
+                .Lance(joao, 200.0)
+                .Constroi();
 
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
@@ -218,21 +204,26 @@ namespace Curso.Leilao
         [Test]
         public void DeveEntenderApenasUmLanceDado()
         {
-            //cenário
-            Leilao leilao = new Leilao("Segundo Leilão");
-
-            Usuario joao = new Usuario("João");
-
-            leilao.Propoe(new Lance(joao, 200.0));
+            //cenário utilizando Test Data Builder
+            Leilao leilao = new CriadorDeLeilao().Para("Segundo Leilão")
+                .Lance(joao, 200.0)
+                .Constroi();
 
 
             //Ação
-            Avaliador avaliador = new Avaliador();
             avaliador.Avalia(leilao);
 
             //Validação
             Assert.AreEqual(200, avaliador.MenorLance, 0.0001);
             Assert.AreEqual(200, avaliador.MaiorLance, 0.0001);
+        }
+
+        [Test]
+        [ExpectedException(typeof(Exception))]
+        public void NaoDeveAvaliarLeilaoSemLances()
+        {
+            Leilao leilao = new CriadorDeLeilao().Para("PlayStation 5").Constroi();
+            avaliador.Avalia(leilao);
         }
     }
 }
