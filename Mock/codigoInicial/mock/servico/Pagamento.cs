@@ -9,7 +9,7 @@ namespace mock.servico
     public class Pagamento
     {
         public virtual double Valor { get; set; }
-        private DateTime Data { get; set; }
+        public DateTime Data { get; set; }
 
         public Pagamento(double valor, DateTime data)
         {            

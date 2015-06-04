@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="infra\PagamentoDao.cs" />
+    <Compile Include="interfaces\IRelogio.cs" />
     <Compile Include="servico\Carteiro.cs" />
     <Compile Include="dominio\Lance.cs" />
     <Compile Include="dominio\Leilao.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="servico\EncerradorDeLeilao.cs" />
     <Compile Include="servico\GeradorDePagamentos.cs" />
     <Compile Include="servico\Pagamento.cs" />
+    <Compile Include="servico\RelogioDoSistema.cs" />
     <Compile Include="testes\EncerradorDeLeilaoTest.cs" />
     <Compile Include="testes\GeradorDePagamentosTest.cs" />
   </ItemGroup>

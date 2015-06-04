@@ -14,24 +14,49 @@ namespace mock.servico
         private IRepositorioDeLeiloes leilaoDao;
         private PagamentoDao pagamentoDao;
         private Avaliador avaliador;
+        private IRelogio relogio;
 
         public GeradorDePagamentos(IRepositorioDeLeiloes leilaoDao, PagamentoDao pagamentoDao, Avaliador avaliador)
         {
             this.leilaoDao = leilaoDao;
             this.pagamentoDao = pagamentoDao;
             this.avaliador = avaliador;
+            this.relogio = new RelogioDoSistema();
         }
 
-        public virtual void Gera()
+        public GeradorDePagamentos(IRepositorioDeLeiloes leilaoDao, PagamentoDao pagamentoDao, Avaliador avaliador, IRelogio relogio)
+        {
+            this.leilaoDao = leilaoDao;
+            this.pagamentoDao = pagamentoDao;
+            this.avaliador = avaliador;
+            this.relogio = relogio;
+        }
+
+        public void Gera()
         {
             List<Leilao> encerrados = new List<Leilao>();
-            encerrados = leilaoDao.encerrados();
+            encerrados = this.leilaoDao.encerrados();
             foreach (var l in encerrados)
             {
                 this.avaliador.avalia(l);                
             }
-            Pagamento pagamento = new Pagamento(this.avaliador.maiorValor, DateTime.Today);
+            Pagamento pagamento = new Pagamento(this.avaliador.maiorValor, proximoDiaUtil());
             this.pagamentoDao.Salvar(pagamento);
+        }
+
+        private DateTime proximoDiaUtil()
+        {
+            DateTime data = this.relogio.Hoje();
+            DayOfWeek diaDaSemana = data.DayOfWeek;
+            if (diaDaSemana == DayOfWeek.Saturday)
+            {
+                data = data.AddDays(2);
+            }
+            else if (diaDaSemana == DayOfWeek.Sunday)
+            {
+                data = data.AddDays(1);
+            }
+            return data;
         }
     }
 }
