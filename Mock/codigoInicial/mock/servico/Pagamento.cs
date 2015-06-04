@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mock.dominio
+namespace mock.servico
 {
     public class Pagamento
     {
-        public double valor { get; private set; }
-        public DateTime data { get; private set; }
+        public virtual double Valor { get; set; }
+        private DateTime Data { get; set; }
 
         public Pagamento(double valor, DateTime data)
-        {
-            this.valor = valor;
-            this.data = data;
+        {            
+            this.Valor = valor;
+            this.Data = data;
         }
-
+        
     }
 }
